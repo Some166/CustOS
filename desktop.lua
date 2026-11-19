@@ -184,30 +184,43 @@ end
 function Desktop:run()
     self:draw()
     while self.running do
-        local event, a, b = os.pullEvent()
-        if event == "term_resize" then
-            self:draw()
-        elseif event == "mouse_click" then
-            local _, x, y = event, a, b
-            local _, h = term.getSize()
-            self:handleClick(x, y, h)
-            self:draw()
-        elseif event == "key" then
-            if a == keys.q then
-                self.running = false
-            elseif self.menuOpen and (a == keys.up or a == keys.down) then
-                if a == keys.up then self.selected = math.max(1, self.selected - 1)
-                else self.selected = math.min(#self.apps, self.selected + 1) end
-                self:draw()
-            elseif self.menuOpen and a == keys.enter then
-                self:openApp(self.apps[self.selected].id)
-                self:draw()
-            elseif a == keys.escape then
-                self.menuOpen, self.powerOpen = false, false
-                self:draw()
+        local event, a, b, c = os.pullEvent()
+
+if event == "term_resize" then
+    self:draw()
+
+elseif event == "mouse_click" then
+    local _, h = term.getSize()
+    self:handleClick(b, c, h)
+    self:draw()
+
+elseif event == "monitor_touch" then
+    local _, h = term.getSize()
+    self:handleClick(b, c, h)
+    self:draw()
+
+elseif event == "key" then
+    if a == keys.q then
+        self.running = false
+
+    elseif self.menuOpen and (a == keys.up or a == keys.down) then
+        if a == keys.up then
+            self.selected = math.max(1, self.selected - 1)
+        else
+            self.selected = math.min(#self.apps, self.selected + 1)
+        end
+        self:draw()
+
+    elseif self.menuOpen and a == keys.enter then
+        self:openApp(self.apps[self.selected].id)
+        self:draw()
+
+    elseif a == keys.escape then
+        self.menuOpen = false
+        self.powerOpen = false
+        self:draw()
             end
         end
     end
 end
-
 return Desktop
