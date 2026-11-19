@@ -1,18 +1,37 @@
-f directory ~= "" then
+local base = "https://raw.githubusercontent.com/Some166/CustOS/main/"
+
+local files = {
+    "startup.lua",
+    "client-test.lua",
+    "server/main.lua"
+}
+
+print("=== CustOS Installer ===")
+print("Installing CustOS...")
+
+for _, file in ipairs(files) do
+    local directory = fs.getDir(file)
+
+    if directory ~= "" then
         fs.makeDir(directory)
     end
 
     print("Downloading " .. file)
 
-    local success, err = pcall(function()
-        shell.run("wget", base .. file, file)
-    end)
+    local url = base .. file
+    local response = http.get(url)
 
-    if not success or not fs.exists(file) then
+    if not response then
         print("FAILED: " .. file)
-        print(err or "Download unsuccessful")
         return
     end
+
+    local content = response.readAll()
+    response.close()
+
+    local output = fs.open(file, "w")
+    output.write(content)
+    output.close()
 end
 
 print("")
