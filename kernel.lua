@@ -1,5 +1,5 @@
 -- custOS kernel bootstrap
-local Network = require("network")
+local Network = require("network.lua")
 
 local Kernel = {}
 
