@@ -3,7 +3,9 @@ local base = "https://raw.githubusercontent.com/Some166/CustOS/main/"
 local files = {
     "startup.lua",
     "client-test.lua",
-    "server/main.lua"
+    "main.lua",
+    "kernel.lua",
+    "network.lua"
 }
 
 print("=== CustOS Installer ===")
