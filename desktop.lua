@@ -155,13 +155,19 @@ function Desktop:handleClick(x, y, h)
     end
 
     if self.powerOpen then
-        local boxH = 6
-        local top = math.max(1, math.floor((h - boxH) / 2))
-        if y == top + 2 then os.reboot()
-        elseif y == top + 3 then os.shutdown()
-        else self.powerOpen = false end
-        return
+    local boxH = 6
+    local top = math.max(1, math.floor((h - boxH) / 2))
+
+    if y == top + 1 then
+        os.reboot()
+    elseif y == top + 2 then
+        os.shutdown()
+    elseif y == top + 3 then
+        self.powerOpen = false
     end
+
+    return
+end
 
     if self.menuOpen then
         local menuH = math.min(#self.apps + 4, h - 1)
