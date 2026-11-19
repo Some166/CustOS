@@ -1,5 +1,5 @@
 -- custOS kernel bootstrap
-local Network = require("server.network")
+local Network = require("network")
 
 local Kernel = {}
 
