@@ -1,7 +1,7 @@
 -- custOS central server entry point
 -- Version 0.1.0
 
-local Kernel = require("server.kernel")
+local Kernel = require("kernel")
 
 local ok, err = pcall(function()
     Kernel.boot()
