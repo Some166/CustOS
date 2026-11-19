@@ -3,13 +3,13 @@
 local BASE = "https://raw.githubusercontent.com/Some166/CustOS/main/"
 local files = {
     "startup.lua",
-    "boot/boot.lua",
-    "kernel/kernel.lua",
-    "desktop/desktop.lua",
-    "desktop/windowmanager.lua",
-    "configuration/defaults.lua",
-    "applications/about.lua",
-    "applications/notepad.lua"
+    "boot.lua",
+    "kernel.lua",
+    "desktop.lua",
+    "windowmanager.lua",
+    "defaults.lua",
+    "about.lua",
+    "notepad.lua"
 }
 
 if not http then
