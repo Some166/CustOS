@@ -1,5 +1,5 @@
 -- custOS desktop shell
-local WindowManager = require("desktop.windowmanager")
+local WindowManager = require("windowmanager")
 local Desktop = {}
 Desktop.__index = Desktop
 
